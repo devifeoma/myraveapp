@@ -11,13 +11,18 @@ HTML.
 # Installing Ionic CLI 5 and Cordova
 - npm install -g ionic cordova
 
-- ionic start
+- ionic start myraveapp blank
 
-- cd myapp
+- cd myraveapp
+
 - npm install --save rave-ionic4
+
 - ionic cordova plugin add cordova-plugin-inappbrowser
+
 - npm install --save @ionic-native/in-app-browser
+
 - Add the module to your AppModule
+
 - Ensure that you have set up a redirect url to handle the response sent from rave. See here for guide lines on how to set up your redirect url
 
 # Usage
@@ -76,7 +81,7 @@ this.rave.init(PRODUCTION_FLAG, "YOUR_PUBLIC_KEY")
 
 
 # Instance Members
-# Rave
+
 init(PRODUCTION_FLAG, PUBLIC_KEY)
 
 You must call the init method with the PRODUCTION_FLAG set to true or false and your PUBLIC KEY. If your production flag is set to true, you will need to pass in your live public key otherwise, you pass in your sandbox public key
