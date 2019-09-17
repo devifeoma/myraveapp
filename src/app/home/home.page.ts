@@ -21,7 +21,7 @@ export class HomePage {
 
 
  ravePay() {
-      this.rave.init(true, "PUBLIC_KEY") //true = production, false = test
+      this.rave.init(true, "FLWPUBK_TEST-11a8d0aa19dfbe93e9935230997e57ad-X") //true = production, false = test
       .then(_ => {
         var paymentObject = this.ravePayment.create({
           customer_email: "user@example.com",

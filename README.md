@@ -1,21 +1,21 @@
 # myraveapp
 Implementation of inline payment for rave in ionic 4/5
 
-Prerequisites
+# Prerequisites
 
 TypeScript,
 JavaScript,
 CSS and Sass,
 HTML.
 
-Installing Ionic CLI 5 and Cordova
+# Installing Ionic CLI 5 and Cordova
 npm install -g ionic cordova
 
 ionic start
 
 
-Instance Members
-Rave
+# Instance Members
+# Rave
 init(PRODUCTION_FLAG, PUBLIC_KEY)
 
 You must call the init method with the PRODUCTION_FLAG set to true or false and your PUBLIC KEY. If your production flag is set to true, you will need to pass in your live public key otherwise, you pass in your sandbox public key
