@@ -13,6 +13,67 @@ HTML.
 
 - ionic start
 
+- cd myapp
+- npm install --save rave-ionic4
+- ionic cordova plugin add cordova-plugin-inappbrowser
+- npm install --save @ionic-native/in-app-browser
+- Add the module to your AppModule
+- Ensure that you have set up a redirect url to handle the response sent from rave. See here for guide lines on how to set up your redirect url
+
+# Usage
+
+import { Rave, RavePayment, Misc } from 'rave-ionic4';
+import { InAppBrowser, InAppBrowserEvent, InAppBrowserObject } from '@ionic-native/
+
+constructor(
+  private rave: Rave, 
+  private ravePayment: RavePayment, 
+  private misc: Misc,
+  private iab: InAppBrowser,
+  ) { }
+
+...
+
+
+this.rave.init(PRODUCTION_FLAG, "YOUR_PUBLIC_KEY")
+      .then(_ => {
+        var paymentObject = this.ravePayment.create({
+          customer_email: "user@example.com",
+          amount: 2000,
+          customer_phone: "234099940409",
+          currency: "NGN",
+          txref: "rave-123456",
+          meta: [{
+              metaname: "flightID",
+              metavalue: "AP1234"
+          }]
+      })
+        this.rave.preRender(paymentObject)
+          .then(secure_link => {
+            secure_link = secure_link +" ";
+            const browser: InAppBrowserObject = this.rave.render(secure_link, this.iab);
+            browser.on("loadstop")
+                .subscribe((event: InAppBrowserEvent) => {
+                  if(event.url.indexOf('https://your-redirect-url') != -1) {
+                    if(this.rave.paymentStatus(url) == 'failed') {
+                      this.alertCtrl.create({
+                        title: "Message",
+                        message: "Oops! Transaction failed"
+                      }).present();
+                    }else {
+                      this.alertCtrl.create({
+                        title: "Message",
+                        message: "Transaction successful"
+                      }).present();
+                    }
+                    browser.close()
+                  }
+                })
+          }).catch(error => {
+            // Error or invalid paymentObject passed in
+          })
+      })
+
 
 # Instance Members
 # Rave
